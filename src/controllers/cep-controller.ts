@@ -6,10 +6,7 @@ import { request } from '@/utils/request';
 
 export default async function cepFinder(req: Request, res: Response) {
   const { cep } = req.params;
-  const isValid = isValidCEP(cep);
   try {
-    if (!isValid) return res.status(httpStatus.BAD_REQUEST);
-
     const { data } = await request.get(`${process.env.VIA_CEP_API}/${cep}/json/`);
     if (data === null)
       return res.status(httpStatus.BAD_REQUEST).send({
