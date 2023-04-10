@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { authenticateToken, validateBody } from '@/middlewares';
 import { getEnrollmentByUser, postCreateOrUpdateEnrollment, getAddressFromCEP } from '@/controllers';
 import { createOrUpdateEnrollmentSchema } from '@/schemas';
+import cepFinder from '@/controllers/cep-controller';
 
 const enrollmentsRouter = Router();
 
@@ -9,6 +10,6 @@ enrollmentsRouter
   .get('/cep', getAddressFromCEP)
   .all('/*', authenticateToken)
   .get('/', getEnrollmentByUser)
-  .post('/', validateBody(createOrUpdateEnrollmentSchema), postCreateOrUpdateEnrollment);
+  .post('/', validateBody(createOrUpdateEnrollmentSchema), postCreateOrUpdateEnrollment)
 
 export { enrollmentsRouter };

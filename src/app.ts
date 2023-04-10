@@ -9,7 +9,6 @@ loadEnv();
 
 import { handleApplicationErrors } from '@/middlewares';
 import { usersRouter, authenticationRouter, eventsRouter, enrollmentsRouter } from '@/routers';
-import { cepRouter } from './routers/cep-router';
 
 const app = express();
 app
@@ -20,7 +19,6 @@ app
   .use('/auth', authenticationRouter)
   .use('/event', eventsRouter)
   .use('/enrollments', enrollmentsRouter)
-  .use('/enrollments/cep', cepRouter)
   .use(handleApplicationErrors);
 
 export function init(): Promise<Express> {
