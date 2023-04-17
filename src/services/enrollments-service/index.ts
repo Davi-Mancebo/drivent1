@@ -4,6 +4,7 @@ import { invalidDataError, notFoundError } from '@/errors';
 import addressRepository, { CreateAddressParams } from '@/repositories/address-repository';
 import enrollmentRepository, { CreateEnrollmentParams } from '@/repositories/enrollment-repository';
 import { exclude } from '@/utils/prisma-utils';
+<<<<<<< HEAD
 
 async function getAddressFromCEP(cep: string) {
   const { data } = await request.get(`${process.env.VIA_CEP_API}/${cep}/json/`);
@@ -18,6 +19,28 @@ async function getAddressFromCEP(cep: string) {
     uf: data.uf,
   } ?? null
   return returnObject;
+=======
+import { AddressEnrollment } from '@/protocols';
+
+async function getAddressFromCEP(cep: string): Promise<AddressEnrollment> {
+  const result = await request.get(`${process.env.VIA_CEP_API}/${cep}/json/`);
+
+  if (!result.data || result.data.erro) {
+    throw notFoundError(); // lança um erro para quem chamou essa função!
+  }
+
+  const { bairro, localidade, uf, complemento, logradouro } = result.data;
+
+  const address: AddressEnrollment = {
+    bairro,
+    cidade: localidade,
+    uf,
+    complemento,
+    logradouro,
+  };
+
+  return address;
+>>>>>>> 72ab463d0e240c1b816829a0566b4e4b2b461875
 }
 
 async function getOneWithAddressByUserId(userId: number): Promise<GetOneWithAddressByUserIdResult> {

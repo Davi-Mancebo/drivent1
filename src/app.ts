@@ -3,7 +3,11 @@ import 'express-async-errors';
 import express, { Express } from 'express';
 import cors from 'cors';
 
+<<<<<<< HEAD
 import { loadEnv, connectDb, disconnectDB } from '@/config'
+=======
+import { loadEnv, connectDb, disconnectDB } from '@/config';
+>>>>>>> 72ab463d0e240c1b816829a0566b4e4b2b461875
 
 loadEnv();
 
